@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Playlist {
-    private ArrayList<Song> songs = new ArrayList<Song>();
+    private static ArrayList<Song> songs = new ArrayList<Song>();
 
     public Playlist(ArrayList<Song> songs){
         this.songs = songs;
@@ -20,29 +20,22 @@ public class Playlist {
         return output;
     }
 
-    public static void readInSong() throws FileNotFoundException {
-        Scanner scan = new Scanner(new File("spotify_unique_years_artists.txt"));
+    //Method to read in Song data (void)
+    public static void readInSong(){
 
-        while(scan.hasNextLine()){
-            String temp = scan.nextLine();
-            String[] temp2 = temp.split(",");
-
-            int numSeconds = Integer.parseInt(temp2[3]);
-            int releaseYr = Integer.parseInt(temp2[4]);
-
-            Song newSong = new Song(temp2[0], temp2[1], temp2[2], numSeconds, releaseYr, temp2[temp2.length-1]);
-            songs.add(newSong);
-        }
     }
 
+    //Method to Search by and display all Songs in a specific genre (void)
     public void genreSearch(){
 
     }
 
+    //Sort by artist (Selection sort) (void)
     public void sortByArtist(){
 
     }
 
+    //Sort by releaseYear (Insertion sort) (void)
     public void sortByReleaseYr(){
 
     }

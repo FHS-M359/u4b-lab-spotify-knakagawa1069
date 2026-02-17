@@ -2,6 +2,7 @@ public class Song {
     private String title, artist, album, genre;
     private int releaseYr, numSeconds;
 
+    //Constructor
     public Song(String title, String artist, String album, int numSeconds, int releaseYr, String genre){
         this.title = title;
         this.artist = artist;
@@ -11,10 +12,12 @@ public class Song {
         this.genre = genre;
     }
 
+    //toString for one Song (in a row format) as demonstrated above
     public String toString() {
         return (String.format("%-20s %-15s %-25s %5d %15s", title, artist, album, releaseYr, genre));
     }
 
+    //get/set methods as needed
     public String getTitle() {
         return title;
     }

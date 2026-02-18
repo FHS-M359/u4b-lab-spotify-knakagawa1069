@@ -13,8 +13,8 @@ public class Playlist {
     public String toString(){
         String output = "";
 
-        for(Song a: songs){
-            output += a.toString();
+        for(int i = 0; i < songs.size(); i++){
+            output += songs.get(i).toString() + "\n";
         }
 
         return output;

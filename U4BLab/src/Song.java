@@ -14,7 +14,7 @@ public class Song {
 
     //toString for one Song (in a row format) as demonstrated above
     public String toString() {
-        return (String.format("%-20s %-15s %-25s %5d %15s", title, artist, album, releaseYr, genre));
+        return (String.format("%-35s %-25s %-30s %5d %15s", title, artist, album, releaseYr, genre));
     }
 
     //get/set methods as needed

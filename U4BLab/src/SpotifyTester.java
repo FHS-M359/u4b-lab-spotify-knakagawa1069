@@ -16,23 +16,10 @@ public class SpotifyTester {
         final int six = 6;
         final int seven = 7;
 
-        Scanner scan = new Scanner(new File("U4BLab/spotify_unique_years_artists.txt"));
-        Scanner scan2 = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-        //Arraylist of song object
-        ArrayList<Song> allSongs = new ArrayList<Song>();
-
-        //just makes the object
-        while(scan.hasNextLine()){
-            String temp = scan.nextLine();
-            String[] temp2 = temp.split(",");
-
-            int numSeconds = Integer.parseInt(temp2[3]);
-            int releaseYr = Integer.parseInt(temp2[4]);
-
-            Song newSong = new Song(temp2[0], temp2[1], temp2[2], numSeconds, releaseYr, temp2[temp2.length-1]);
-            allSongs.add(newSong);
-        }
+        Playlist.readInSong();
+        ArrayList<Song> allSongs = Playlist.getSongs();
 
         //object of playlist
         Playlist playlist = new Playlist(allSongs);
@@ -52,33 +39,73 @@ public class SpotifyTester {
                     "7 - Quit \n" +
                     "Enter choice (1-7)");
 
-            int ans = scan2.nextInt();
+            int ans = scan.nextInt();
 
-            if(ans == five){
-                scan2.nextLine();
-                System.out.println("Enter genre to search: ");
-                String ans2 = scan2.nextLine();
-
-                ArrayList<Song> genreSearch = new ArrayList<Song>();
-
-                for(Song a: allSongs){
-                    if(a.getGenre().toLowerCase().equals(ans2.toLowerCase())){
-                        genreSearch.add(a);
-                    }
-                }
-                System.out.println(genreSearch);
+            if(ans == one) { //ARTIST A-Z
+                playlist.ascendingSortByArtist();
             }
+            else if(ans == two) { //ARTIST Z-A
+                playlist.descendingSortByArtist();
+            }
+            else if(ans == three){ //SORT BY YEAR (OLDEST -> NEWEST)
+                for (int i = 0; i < allSongs.size() - 1; i++) {
+                    int minIndex = i;
 
-            if (ans == six) {
+                    //searches the rest of the arraylist for smallest value
+                    for (int j = i + 1; j < allSongs.size(); j++) {
+                        if (allSongs.get(j).getReleaseYr() < allSongs.get(minIndex).getReleaseYr()){
+                            minIndex = j;
+                        }
+                    }
+
+                    //swaps values
+                    Song temp = allSongs.get(i);
+                    allSongs.set(i, allSongs.get(minIndex));
+                    allSongs.set(minIndex, temp);
+                }
+                for (Song a: allSongs){
+                    System.out.println(a);
+                }
+            } //INCOMPLETE
+            else if(ans == four){ //SORT BY YEAR (OLDEST -> NEWEST)
+                for (int i = allSongs.size() - 1; i > 1; i--) {
+                    int maxIndex = i;
+
+                    //searches the rest of the arraylist for smallest value
+                    for (int j = i - 1; j >= 0; j--) {
+                        if (allSongs.get(j).getReleaseYr() < allSongs.get(maxIndex).getReleaseYr()){
+                            maxIndex = j;
+                        }
+                    }
+
+                    //swaps values
+                    Song temp = allSongs.get(i);
+                    allSongs.set(i, allSongs.get(maxIndex));
+                    allSongs.set(maxIndex, temp);
+                }
+                for (Song a: allSongs){
+                    System.out.println(a);
+                }
+            } //INCOMPLETE
+            else if (ans == five) { //SEARCH BY GENRE
+                    scan.nextLine();
+                    System.out.println("Enter genre to search: ");
+                    String ans2 = scan.nextLine();
+
+                    playlist.genreSearch(ans2);
+                }
+            else if (ans == six) { //DISPLAY ALL SONGS
                 System.out.println();
                 System.out.println(String.format("%-35s %-25s %-30s %5s %15s", "Title", "Artist", "Album", "Year", "Genre"));
                 System.out.println("-------------------------------------------------------------------------------------------------------------------");
 
                 System.out.println(playlist.toString());
             }
-            else if(ans == seven){
+            else if(ans == seven){ //QUIT
                 cont = false;
+                System.out.println("Goodbye");
             }
+            System.out.println();
         }
     }
 }

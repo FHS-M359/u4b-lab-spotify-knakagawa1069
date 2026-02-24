@@ -105,8 +105,39 @@ public class Playlist {
     }
 
     //Sort by releaseYear (Insertion sort) (void)
-    public void sortByReleaseYr(){
+    public void ascendingSortByReleaseYr(){
+        for(int i = 1; i < songs.size(); i++){
+            int tempYr = songs.get(i).getReleaseYr();
+            int pos = i;
 
+            while(pos > 0 && songs.get(pos - 1).getReleaseYr() > tempYr){
+                songs.get(pos).setReleaseYr(songs.get(pos-1).getReleaseYr());
+                pos--;
+            }
+            songs.get(pos).setReleaseYr(tempYr);
+        }
+
+        for (Song a : songs) {
+            System.out.println(a);
+        }
+    }
+
+    //Sort by releaseYear (Insertion sort) (void)
+    public void descendingSortByReleaseYr(){
+        for(int i = 1; i < songs.size(); i++){
+            int tempYr = songs.get(i).getReleaseYr();
+            int pos = i;
+
+            while(pos > 0 && songs.get(pos - 1).getReleaseYr() < tempYr){
+                songs.get(pos).setReleaseYr(songs.get(pos-1).getReleaseYr());
+                pos--;
+            }
+            songs.get(pos).setReleaseYr(tempYr);
+        }
+
+        for (Song a : songs) {
+            System.out.println(a);
+        }
     }
 
     public static ArrayList<Song> getSongs() {

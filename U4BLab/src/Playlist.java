@@ -13,6 +13,7 @@ public class Playlist {
     public String toString(){
         String output = "";
 
+        //displays every single song (from the ArrayList)
         for(int i = 0; i < songs.size(); i++){
             output += songs.get(i).toString() + "\n";
         }
@@ -26,12 +27,16 @@ public class Playlist {
 
         //just makes the object
         while(scan.hasNextLine()){
+            //next line (String)
             String temp = scan.nextLine();
+            //break up into array (all different uses)
             String[] temp2 = temp.split(",");
 
+            //turns the two necessary values into intergers (currently string)
             int numSeconds = Integer.parseInt(temp2[3]);
             int releaseYr = Integer.parseInt(temp2[4]);
 
+            //creates an object, and adds to the ArrayList
             Song newSong = new Song(temp2[0], temp2[1], temp2[2], numSeconds, releaseYr, temp2[temp2.length-1]);
             songs.add(newSong);
         }
@@ -42,6 +47,7 @@ public class Playlist {
         ArrayList<Song> genreSearch = new ArrayList<Song>();
 
         for (Song a : songs) { //gets all of the songs into a ArrayList
+            //not case sensitive, if it matches, then add it to the later displayed String
             if (a.getGenre().toLowerCase().equals(genre.toLowerCase())) {
                 genreSearch.add(a);
             }

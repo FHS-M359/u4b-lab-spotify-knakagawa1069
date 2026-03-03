@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -62,15 +64,16 @@ public class Playlist {
 
     //Sort by artist (Selection sort) (void) A-Z
     public void ascendingSortByArtist(){
+        //temp variables for use
         String fLetter1, fLetter2;
-        for (int i = 0; i < songs.size() - 1; i++) {
+        for (int i = 0; i < songs.size() - 1; i++) { //go through length -1 of the array
             int minIndex = i;
 
             //searches the rest of the arraylist for smallest value
-            for (int j = i + 1; j < songs.size(); j++) {
+            for (int j = i + 1; j < songs.size(); j++) { //every index after the current one being compared to
                 fLetter1 = songs.get(j).getArtist().substring(0, 1);
                 fLetter2 = songs.get(minIndex).getArtist().substring(0, 1);
-                if (fLetter1.toLowerCase().compareTo(fLetter2.toLowerCase()) < 0){
+                if (fLetter1.toLowerCase().compareTo(fLetter2.toLowerCase()) < 0){ //if this character is before the second one
                     minIndex = j;
                 }
             }
@@ -112,10 +115,12 @@ public class Playlist {
 
     //Sort by releaseYear (Insertion sort) (void)
     public void ascendingSortByReleaseYr(){
-        for(int i = 1; i < songs.size(); i++){
+        //same logic used for traditional insertion sorts
+        for(int i = 1; i < songs.size(); i++){ //start from 2nd index, go to end
             int tempYr = songs.get(i).getReleaseYr();
             int pos = i;
 
+            //while the position is in the ArrayList domain, and the previous index's year is before the temp one
             while(pos > 0 && songs.get(pos - 1).getReleaseYr() > tempYr){
                 songs.get(pos).setReleaseYr(songs.get(pos-1).getReleaseYr());
                 pos--;
@@ -134,7 +139,7 @@ public class Playlist {
             int tempYr = songs.get(i).getReleaseYr();
             int pos = i;
 
-            while(pos > 0 && songs.get(pos - 1).getReleaseYr() < tempYr){
+            while(pos > 0 && songs.get(pos - 1).getReleaseYr() < tempYr){ //you change one character for reverse logic
                 songs.get(pos).setReleaseYr(songs.get(pos-1).getReleaseYr());
                 pos--;
             }
